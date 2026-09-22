@@ -1,0 +1,20 @@
+workflows:
+  android-workflow:
+    name: Android APK Build
+    max_build_duration: 15
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        - action
+      vars:
+        PACKAGE_NAME: "com.example.simplecompass"
+      java: 17
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+      - name: Build Android APK
+        script: |
+          ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/apk/**/*.apk
