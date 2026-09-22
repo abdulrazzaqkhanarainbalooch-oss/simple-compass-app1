@@ -10,11 +10,14 @@ workflows:
         PACKAGE_NAME: "com.example.simplecompass"
       java: 17
     scripts:
-      - name: Set up local.properties
-        script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
-      - name: Build Android APK
-        script: |
-          ./gradlew assembleDebug
+      -       scripts:
+        - name: Set up local.properties
+          script: |
+            echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+        - name: Build Android APK
+          script: |
+            chmod +x gradlew
+            ./gradlew assembleDebug
+
     artifacts:
       - app/build/outputs/apk/**/*.apk
